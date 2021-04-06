@@ -25,6 +25,7 @@ mongoose.connect(process.env.MONGODB_URI, mongooseOptions)
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/users');
 var mealsRouter = require('./routes/meals/meals');
+var workoutRouter = require('./routes/workout/workout');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter); 
 app.use('/api/meals', mealsRouter); 
+app.use('/api/workout', workoutRouter); 
 // app.listen(4000, () => console.log('Backend on port 4000'))
 
 // catch 404 and forward to error handler

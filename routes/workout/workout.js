@@ -1,14 +1,14 @@
-// var express = require('express');
-// var router = express.Router();
-// var mealController = require('./workoutsController');
-// console.clear()
+var express = require('express');
+var router = express.Router();
+var mealController = require('./workoutController');
+console.clear()
 
 
 
-// router.post('/add-workouts', mealController.addMeals);
+router.post('/add-workout', mealController.addMeals);
 
 // router.get('/view-meals/:id', mealController.viewMeals)
 
-// // router.post('/login', userController.login);
+// router.post('/login', userController.login);
 
-// module.exports = router;
+module.exports = router;
