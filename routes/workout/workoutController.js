@@ -8,7 +8,7 @@ const Workout = require("./workoutModel");
 // ],
 
 module.exports = {
-  addMeals: async (req, res) => {
+  addWorkout: async (req, res) => {
     console.clear();
     // console.log(req.body)
 
@@ -41,37 +41,58 @@ module.exports = {
     }
   },
 
-//   viewMeals: async (req, res) => {
-//     // console.log(req.body)
+  viewWorkouts: async (req, res) => {
+    // console.log(req.body)
 
-//     try {
-//       const id = req.params.id;
-//       console.log(req.params.id);
-//       let allUserMeals = await User.findById(id)
-//       .populate("meals")
-//       .exec();
-//       // console.log(allUserMeals);
+    try {
+      const id = req.params.id;
+    //   console.log(req.params.id);
+      let allUserWorkouts = await User.findById(id)
+      .populate("workouts")
+      .exec();
+      // console.log(allUserMeals);
 
-//       res.status(200).json(allUserMeals.meals);
-//     } catch (error) {
-//       console.log("err", error);
-//       res.status(500).json(error);
-//     }
-//   },
+      res.status(200).json(allUserWorkouts.workouts);
+    } catch (error) {
+      console.log("err", error);
+      res.status(500).json(error);
+    }
+  },
 
-//   deleteByID: async (req, res) => {
-//     console.clear()
-//     // const _id = req.params.id;
-//     console.log(req.params.id);
-//     // console.log(id);
-// // console.log(Meal)
-//     try {
-//       let deletedByID = await Meal.findByIdAndRemove(req.params.id);
+  deleteByID: async (req, res) => {
+    console.clear()
+    // const _id = req.params.id;
+    console.log(req.params.id);
+    // console.log(id);
+// console.log(Meal)
+    try {
+      let deletedByID = await Workout.findOneAndRemove(req.params.id);
 
-//       res.status(200).json(deletedByID);
-//     } catch (error) {
-//       console.log(error);
-//       res.status(500).json(error);
-//     }
-//   },
+      res.status(200).json(deletedByID);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+
+  updateByID: async (req, res) =>{
+      console.log(req.params)
+      try {
+        //   let updatedById = 
+          await Workout.findOneAndUpdate({_id:req.params.id},{name:req.params.name, cal:req.params.cal},
+            (e,data)=>{
+                if(e){
+                    console.log(e)
+                }else{
+                    console.log(data);
+                    
+                }
+            }
+            );
+        //   console.log(updatedById)
+        //   res.status(200).json(updatedById)
+      } catch (e) {
+          console.log(e)
+      }
+  }
 };
