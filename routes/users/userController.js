@@ -1,42 +1,41 @@
 const { createUser,
-        hashPassword,
-        errorHandler, 
-        findOneUser, 
-        comparePassword, 
-        createJwtToken  } = require('./authHelper');
+    hashPassword,
+    errorHandler,
+    findOneUser,
+    comparePassword,
+    createJwtToken } = require('./authHelper');
 
 module.exports = {
     register: async (req, res) => {
-        
-        
-       try {
+        try {
             let newUser = await createUser(req.body);
             let hashedPassword = await hashPassword(newUser.password);
-            newUser.password = hashedPassword;  
-            let savedUser = await newUser.save();
+            newUser.password = hashedPassword;
+            // let savedUser = await newUser.save();
+            await newUser.save();
             res.status(200).json({
-                message: 'Successfully signed up'
+                message: 'Successfully signed up',
+                newUser: newUser
             });
-            console.log(req.body)
-       } catch (error) {
+
+        } catch (error) {
             let errorMessage = await errorHandler(error);
             res.status(errorMessage.status).json({
                 message: errorMessage.message
             })
-       }
+        }
     },
+
     login: async (req, res) => {
-        
         try {
             let foundUser = await findOneUser(req.body.email);
             if (foundUser === 404) {
                 throw {
-                    status: 500, 
+                    status: 500,
                     message: 'User not found, please sign up'
                 }
             }
             let comparedPassword = await comparePassword(req.body.password, foundUser.password);
-            console.log(req.body.password)
             if (comparedPassword === 409) {
                 throw {
                     status: 409,
@@ -48,7 +47,7 @@ module.exports = {
                 token: jwtToken
             });
 
-        } catch (error) {    
+        } catch (error) {
             res.status(error.status).json({
                 message: error.message
             })

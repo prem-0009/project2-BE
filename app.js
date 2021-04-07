@@ -25,13 +25,15 @@ mongoose.connect(process.env.MONGODB_URI, mongooseOptions)
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/users');
 var mealsRouter = require('./routes/meals/meals');
+// var foodRouter = require('./routes/food/food');
 
 var app = express();
 
 // view engine setup
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 app.use(cors())
 app.use(logger('dev'));
@@ -43,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter); 
 app.use('/api/meals', mealsRouter); 
+// app.use('/api/food', foodRouter); 
 // app.listen(4000, () => console.log('Backend on port 4000'))
 
 // catch 404 and forward to error handler
