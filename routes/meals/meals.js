@@ -11,11 +11,11 @@ router.put('/edit-meal', mealController.editMeal)
 
 router.delete('/delete-meals/:id', mealController.deleteMeal)
 
-router.post('/add-food', mealController.addFood);
+// router.post('/add-food', mealController.addFood);
 
-router.put('/edit-food', mealController.editFood);
+// router.put('/edit-food', mealController.editFood);
 
-router.delete('/delete-food/', mealController.deleteFood);
-// router.post('/login', userController.login);
+// router.delete('/delete-food/', mealController.deleteFood);
+
 
 module.exports = router;

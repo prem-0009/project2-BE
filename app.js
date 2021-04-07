@@ -1,13 +1,13 @@
 console.clear()
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 require('dotenv').config();
-var cors = require('cors');
-var mongoose = require('mongoose');
+const cors = require('cors');
+const mongoose = require('mongoose');
 // mongoose connector
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -22,12 +22,12 @@ mongoose.connect(process.env.MONGODB_URI, mongooseOptions)
         .then(() => console.log('MONGODB CONNECTED'))
         .catch(err => console.log(err));
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users/users');
-var mealsRouter = require('./routes/meals/meals');
-// var foodRouter = require('./routes/food/food');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users/users');
+const mealsRouter = require('./routes/meals/meals');
+const foodRouter = require('./routes/food/food');
 
-var app = express();
+const app = express();
 
 // view engine setup
 
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter); 
 app.use('/api/meals', mealsRouter); 
-// app.use('/api/food', foodRouter); 
+app.use('/api/food', foodRouter); 
 // app.listen(4000, () => console.log('Backend on port 4000'))
 
 // catch 404 and forward to error handler
