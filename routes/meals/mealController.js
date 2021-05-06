@@ -5,7 +5,7 @@ const Food = require("../food/foodModel")
 
 
 module.exports = {
-  addMeal: async (req, res) => {
+  updateMeals: async (req, res) => {
     console.clear()
     console.log('req.body.userId==================================',req.body.userId)
     console.log('req.body.meals==================================',req.body.meals)
