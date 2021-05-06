@@ -11,6 +11,8 @@ router.put('/edit-meal', mealController.editMeal)
 
 router.post('/add-food', mealController.addFood)
 
+router.post('/delete-food', mealController.deleteFood)
+
 router.delete('/delete-meal', mealController.deleteMeal)
 // router.delete('/delete-meal/:id', mealController.deleteMeal)
 
