@@ -19,7 +19,8 @@ var UserSchema = new mongoose.Schema({
     },
     password: { type: String, default: ''},
     // timestamp: {type: String, default: now.format('dddd, MMMM Do YYYY, h:mm:ss a')},
-    meals:[{type:mongoose.Schema.Types.ObjectId, ref:'Meal'}],
+    // meals:[{type:mongoose.Schema.Types.ObjectId, ref:'Meal'}],
+    meals: {type: Array},
     workouts: {type: Array}
 });
 
