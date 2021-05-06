@@ -13,7 +13,11 @@ module.exports = {
             newUser.password = hashedPassword;
             // let savedUser = await newUser.save();
             await newUser.save();
-            res.status(200).json({
+            // res.status(200).json({
+            //     message: 'Successfully signed up',
+            //     newUser: newUser
+            // });
+            res.status(200).send({
                 message: 'Successfully signed up',
                 newUser: newUser
             });

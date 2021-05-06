@@ -6,6 +6,7 @@ const Food = require("../food/foodModel")
 
 module.exports = {
   addMeal: async (req, res) => {
+
     try {
       let foundUser = await User.findById(req.body.userId); //---------------find user     
       let newMeal = new Meal({
@@ -25,14 +26,13 @@ module.exports = {
   },
 
   viewMeals: async (req, res) => {
-
     try {
-      let allUserMeals = await User.findById(req.params.id)
-        .populate("meals")
-        .select("-password -__v") // exclude  version
-      // .exec("-__v");
+      let allMeals = await User
+        .findById(req.params.id)
+        .populate('meals') 
+        // .select("-password -__v")
 
-      res.status(200).json(allUserMeals.meals).send(allUserMeals.meals);
+      res.status(200).send(allMeals);
     } catch (error) {
       console.log("err", error);
       res.status(500).json(error);
@@ -42,45 +42,70 @@ module.exports = {
   editMeal: async (req, res) => {
     let editMeal = await Meal.findByIdAndUpdate(
       req.body.mealId,
-      {mealType: req.body.mealType}
+      { mealType: req.body.mealType }
     )
     editMeal.save()
     res.send(editMeal)
   },
 
   deleteMeal: async (req, res) => {
-    try {
-      let deletedByID = await Meal.findByIdAndRemove(req.params.id);
+    console.clear()
+    console.log('req.query.userId ===========================', req.query)
+    
+    // try {
+    //   let deletedByID = await Meal.findByIdAndRemove(req.params.id);
 
-      res.status(200).json(deletedByID);
+    //   res.status(200).json(deletedByID);
+    // } catch (error) {
+    //   console.log(error);
+    //   res.status(500).json(error);
+    // }
+  },
+
+  addFood: async (req, res) => {
+    try {
+      let foundMeal = await Meal.findById(req.body.mealId)
+
+      let newFood = {
+        id: req.body.id,
+        name: req.body.name,
+        cal: req.body.cal,
+      }
+
+      await foundMeal.food.push(newFood)
+      await foundMeal.save()
+
+      res.status(200).json(foundMeal);
     } catch (error) {
-      console.log(error);
       res.status(500).json(error);
     }
   },
 
-  // addFood: async (req, res) => {
+  // editFood: async (req, res) => {
   //   try {
-  //     let foundUser = await User.findById(req.body.userId)
-  //     let foundMeal = await Meal.findById(req.body.mealId); //---------------find user
-  //     let newFood = await new Food({
-  //       name: req.body.name,
-  //       cal: req.body.cal,
+  //     let foundMeal = await Meal.findById(req.body.mealId)
+  //     foundMeal.food.map(item => {
+  //       if (item.id === req.body.foodId) {
+  //         return {
+  //           ...item,
+  //           name: req.body.name,
+  //           cal: req.body.cal
+  //         }
+  //       } else { return item }
   //     })
 
-  //     let saveNewFood = newFood.save()
-
-  //     let foodArray = foundMeal.food
-  //     foodArray.push(newFood)
-
-  //     foundMeal.save()
-  //     foundUser.save()
-
-  //     res.status(200).json({ saveNewFood, foundMeal, foundUser });
-  //   } catch (error) {
+  //     await foundMeal.save()
+  //     res.status(200).json(foundMeal);
+  //   }
+  //   catch (e) {
   //     res.status(500).json(error);
   //   }
-  // },
+
+  // }
+}
+
+
+
 
   // editFood: async (req, res) => {
   //   try {
@@ -120,7 +145,7 @@ module.exports = {
   //     res.status(500).json(error)
   //   }
   // }
-}
-  
+// }
+
 
 

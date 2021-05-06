@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 
 var MealsSchema = new mongoose.Schema({
   mealType: { type: String, required: true },
-  food: [{ type: mongoose.Schema.ObjectId, ref: "Food" }],
+  food: { type: Array },
+  // food: [{ type: mongoose.Schema.ObjectId, ref: "Food" }],
 });
 
 module.exports = mongoose.model("Meal", MealsSchema);

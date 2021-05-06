@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mealController = require('./mealController');
-console.clear()
+
 
 router.post('/add-meal', mealController.addMeal);
 
@@ -9,13 +9,10 @@ router.get('/view-meals/:id', mealController.viewMeals)
 
 router.put('/edit-meal', mealController.editMeal)
 
-router.delete('/delete-meals/:id', mealController.deleteMeal)
+router.post('/add-food', mealController.addFood)
 
-// router.post('/add-food', mealController.addFood);
-
-// router.put('/edit-food', mealController.editFood);
-
-// router.delete('/delete-food/', mealController.deleteFood);
+router.delete('/delete-meal', mealController.deleteMeal)
+// router.delete('/delete-meal/:id', mealController.deleteMeal)
 
 
 module.exports = router;
