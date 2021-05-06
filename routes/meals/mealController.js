@@ -29,8 +29,8 @@ module.exports = {
     try {
       let allMeals = await User
         .findById(req.params.id)
-        .populate('meals') 
-        // .select("-password -__v")
+        .populate('meals')
+      // .select("-password -__v")
 
       res.status(200).send(allMeals);
     } catch (error) {
@@ -50,16 +50,27 @@ module.exports = {
 
   deleteMeal: async (req, res) => {
     console.clear()
-    console.log('req.query.userId ===========================', req.query)
-    
-    // try {
-    //   let deletedByID = await Meal.findByIdAndRemove(req.params.id);
+    // console.log('req.query.targetMealId ===========================', req.query.targetMealId)
 
-    //   res.status(200).json(deletedByID);
-    // } catch (error) {
-    //   console.log(error);
-    //   res.status(500).json(error);
-    // }
+    try {
+
+      let foundUser = await User.findById(req.query.userId)
+      console.log('foundUser ================================', foundUser)
+      
+      let updatedMeals = foundUser.meals.filter(item => item.toString() !== req.query.targetMealId)
+      console.log('updatedMeals ================================', updatedMeals)
+
+      foundUser.meals = updatedMeals
+      await foundUser.save()
+      await Meal.findByIdAndDelete(req.query.targetMealId);
+      
+      // console.log('deletedByID ===========================', deletedByID)
+
+      res.status(200).json({foundUser});
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
   },
 
   addFood: async (req, res) => {
