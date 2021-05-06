@@ -22,9 +22,10 @@ mongoose.connect(process.env.MONGODB_URI, mongooseOptions)
         .then(() => console.log('MONGODB CONNECTED'))
         .catch(err => console.log(err));
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users/users');
-const dataRouter = require('./routes/data/dataRoutes');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users/users');
+var mealsRouter = require('./routes/meals/meals');
+var workoutRouter = require('./routes/workout/workout');
 
 const app = express();
 
@@ -43,8 +44,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter); 
-app.use('/api/data', dataRouter); 
-
+app.use('/api/meals', mealsRouter); 
+app.use('/api/workout', workoutRouter); 
+// app.listen(4000, () => console.log('Backend on port 4000'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
