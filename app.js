@@ -24,9 +24,7 @@ mongoose.connect(process.env.MONGODB_URI, mongooseOptions)
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users/users');
-// const mealsRouter = require('./routes/meals/meals');
 const dataRouter = require('./routes/data/dataRoutes');
-// const foodRouter = require('./routes/food/food');
 
 const app = express();
 
@@ -45,7 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter); 
-// app.use('/api/meals', mealsRouter); 
 app.use('/api/data', dataRouter); 
 
 
