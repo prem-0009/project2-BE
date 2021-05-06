@@ -43,7 +43,7 @@ module.exports = {
   //   }
   // },
 
-  // viewMeals: async (req, res) => {
+  // showAllMeals: async (req, res) => {
   //   try {
   //     let allMeals = await User
   //       .findById(req.params.id)
@@ -56,7 +56,7 @@ module.exports = {
   //     res.status(500).json(error);
   //   }
   // },
-  viewMeals: async (req, res) => {
+  showAllMeals: async (req, res) => {
     try {
       let foundUser = await User.findById(req.params.id)
       res.status(200).send(foundUser);

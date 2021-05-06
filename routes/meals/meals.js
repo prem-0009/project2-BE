@@ -5,7 +5,7 @@ var mealController = require('./mealController');
 
 router.post('/add-meal', mealController.addMeal);
 
-router.get('/view-meals/:id', mealController.viewMeals)
+router.get('/show-all-meals/:id', mealController.showAllMeals)
 
 router.put('/edit-meal', mealController.editMeal)
 
